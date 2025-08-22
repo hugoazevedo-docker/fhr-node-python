@@ -1,5 +1,5 @@
 {
-	"name": "node-python",
+	"name": "fhr-node-python",
 	"dockerComposeFile": "compose.yml",
 	"containerEnv": {
 		"DOCKER_USERNAME": "${localEnv:DOCKER_USERNAME}",
@@ -7,7 +7,7 @@
 	},
   	"initializeCommand": "echo ${REGISTRY_TOKEN} | docker login -u ${DOCKER_USERNAME} --password-stdin",
 
-	"service": "node-python-hdi",
+	"service": "fhr-node-python-hdi",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"customizations": {
 		"vscode": {
