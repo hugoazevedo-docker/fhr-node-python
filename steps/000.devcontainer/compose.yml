@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
       args:
         - GO_VERSION=1.24.0
-        - USER_NAME=vscode
+        - USER_NAME=${USER}
     network_mode: "host"
     volumes:
       - ../..:/workspaces:cached      
