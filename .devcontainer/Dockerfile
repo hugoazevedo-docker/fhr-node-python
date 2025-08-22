@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM demonstrationorg/dhi-node:24.6-debian12-dev_fhr-node-python-codespace
+FROM demonstrationorg/dhi-node:24.6-debian12-dev_fhr-node-python-codespaces
 
 LABEL maintainer="@hugoazevedo-docker"
 
