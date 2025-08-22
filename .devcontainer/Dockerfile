@@ -1,11 +1,7 @@
 # syntax=docker/dockerfile:1
-FROM demonstrationorg/dhi-k33g-golang:1.24-debian12-dev
+FROM demonstrationorg/dhi-k33g-nodejs:20-dev_python
 
 LABEL maintainer="@k33g_org"
-
-ARG TARGETOS
-ARG TARGETARCH
-
 
 ARG USER_NAME=${USER_NAME}
 
@@ -17,22 +13,11 @@ ENV LC_COLLATE=C
 ENV LC_CTYPE=en_US.UTF-8
 
 # ------------------------------------
-# Install Tools, Python and NodeJS
+# Install Tools
 # ------------------------------------
 RUN <<EOF
 apt-get update 
-apt-get install -y curl wget jq git build-essential xz-utils bat software-properties-common sudo sshpass unzip gzip tar ca-certificates
-ln -s /usr/bin/batcat /usr/bin/bat
-
-# Install Python
-apt-get install -y python3 python3-pip python3-dev python3-venv python3-distutils
-# Create symlinks for compatibility
-ln -sf /usr/bin/python3 /usr/bin/python
-
-# Install NodeJS
-curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_22.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
-apt-get update && apt-get install nodejs -y
+apt-get install -y curl wget git build-essential xz-utils software-properties-common sudo sshpass ca-certificates
 
 # Rebuild ldconfig cache for VS Code server compatibility
 ldconfig
@@ -56,7 +41,6 @@ RUN adduser ${USER_NAME} sudo
 # Ensure sudo group users are not asked for a password when using 
 # sudo command by ammending sudoers file
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
 
 # Set the working directory
 WORKDIR /home/${USER_NAME}

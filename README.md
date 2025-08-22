@@ -1,2 +1,1 @@
-# golang-hdi-devcontainer
-
+# nodejs-python-hdi-devcontainer

@@ -1,6 +1,6 @@
 services:
 
-  golang-hdi:
+  node-python-hdi:
     build:
       context: .
       dockerfile: Dockerfile

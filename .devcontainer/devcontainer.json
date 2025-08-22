@@ -1,16 +1,13 @@
 {
-	"name": "golang-hdi",
-
+	"name": "node-python",
 	"dockerComposeFile": "compose.yml",
+	// "containerEnv": {
+	// 	"DOCKER_USERNAME": "${localEnv:DOCKER_USERNAME}",
+	// 	"DOCKER_PASSWORD": "${localEnv:REGISTRY_TOKEN}"
+	// },
+  	// "initializeCommand": "echo ${REGISTRY_TOKEN} | docker login -u ${DOCKER_USERNAME} --password-stdin",
 
-	"containerEnv": {
-		"DOCKER_USERNAME": "${localEnv:DOCKER_USERNAME}",
-		"DOCKER_PASSWORD": "${localEnv:REGISTRY_TOKEN}"
-	},
-  	"initializeCommand": "echo ${REGISTRY_TOKEN} | docker login -u ${DOCKER_USERNAME} --password-stdin",
-
-
-	"service": "golang-hdi",
+	"service": "node-python-hdi",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"customizations": {
 		"vscode": {
@@ -25,7 +22,6 @@
     "remoteEnv": {
 		"LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}"
     },
-	"forwardPorts": [3000, 4000, 8080, 9090, 7070, 6443],
    	"mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
 		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached",
