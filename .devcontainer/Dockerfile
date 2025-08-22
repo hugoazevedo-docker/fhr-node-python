@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
-FROM demonstrationorg/dhi-k33g-nodejs:20-dev_python
+FROM demonstrationorg/dhi-node:24.6-debian12-dev_fhr-node-python-codespace
 
-LABEL maintainer="@k33g_org"
+LABEL maintainer="@hugoazevedo-docker"
 
 ARG USER_NAME=${USER_NAME}
 
