@@ -1,15 +1,11 @@
-FROM --platform=$BUILDPLATFORM ubuntu:22.04
-
+# syntax=docker/dockerfile:1
+FROM demonstrationorg/dhi-k33g-golang:1.24-debian12-dev
 
 LABEL maintainer="@k33g_org"
 
 ARG TARGETOS
 ARG TARGETARCH
 
-ARG GO_VERSION=${GO_VERSION}
-ARG TINYGO_VERSION=${TINYGO_VERSION}
-ARG EXTISM_VERSION=${EXTISM_VERSION}
-ARG NODE_MAJOR=${NODE_MAJOR}
 
 ARG USER_NAME=${USER_NAME}
 
@@ -25,38 +21,15 @@ ENV LC_CTYPE=en_US.UTF-8
 # ------------------------------------
 RUN <<EOF
 apt-get update 
-apt-get install -y curl wget jq git build-essential xz-utils bat software-properties-common sudo sshpass unzip
+apt-get install -y curl wget jq git build-essential xz-utils bat software-properties-common sudo sshpass unzip gzip tar ca-certificates
 ln -s /usr/bin/batcat /usr/bin/bat
+
+# Rebuild ldconfig cache for VS Code server compatibility
+ldconfig
 
 apt-get clean autoclean
 apt-get autoremove --yes
 rm -rf /var/lib/{apt,dpkg,cache,log}/
-EOF
-
-# ------------------------------------
-# Install Go
-# ------------------------------------
-RUN <<EOF
-
-wget https://golang.org/dl/go${GO_VERSION}.linux-${TARGETARCH}.tar.gz
-tar -xvf go${GO_VERSION}.linux-${TARGETARCH}.tar.gz
-mv go /usr/local
-rm go${GO_VERSION}.linux-${TARGETARCH}.tar.gz
-EOF
-
-# ------------------------------------
-# Set Environment Variables for Go
-# ------------------------------------
-ENV PATH="/usr/local/go/bin:${PATH}"
-ENV GOPATH="/home/${USER_NAME}/go"
-ENV GOROOT="/usr/local/go"
-
-RUN <<EOF
-go version
-go install -v golang.org/x/tools/gopls@latest
-go install -v github.com/ramya-rao-a/go-outline@latest
-go install -v github.com/stamblerre/gocode@v1.0.0
-go install -v github.com/mgechev/revive@v1.3.2
 EOF
 
 # ------------------------------------
