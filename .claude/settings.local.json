@@ -6,7 +6,9 @@
       "Bash(docker compose:*)",
       "Bash(docker ps:*)",
       "Bash(docker system:*)",
-      "Bash(docker logs:*)"
+      "Bash(docker logs:*)",
+      "Bash(node:*)",
+      "Bash(docker build:*)"
     ],
     "deny": [],
     "ask": []

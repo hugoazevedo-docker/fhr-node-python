@@ -17,16 +17,27 @@ ENV LC_COLLATE=C
 ENV LC_CTYPE=en_US.UTF-8
 
 # ------------------------------------
-# Install Tools
+# Install Tools, Python and NodeJS
 # ------------------------------------
 RUN <<EOF
 apt-get update 
 apt-get install -y curl wget jq git build-essential xz-utils bat software-properties-common sudo sshpass unzip gzip tar ca-certificates
 ln -s /usr/bin/batcat /usr/bin/bat
 
+# Install Python
+apt-get install -y python3 python3-pip python3-dev python3-venv python3-distutils
+# Create symlinks for compatibility
+ln -sf /usr/bin/python3 /usr/bin/python
+
+# Install NodeJS
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_22.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
+apt-get update && apt-get install nodejs -y
+
 # Rebuild ldconfig cache for VS Code server compatibility
 ldconfig
 
+# Clean up
 apt-get clean autoclean
 apt-get autoremove --yes
 rm -rf /var/lib/{apt,dpkg,cache,log}/

@@ -5,7 +5,6 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - GO_VERSION=1.24.0
         - USER_NAME=vscode
     network_mode: "host"
     volumes:
