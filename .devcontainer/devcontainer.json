@@ -1,11 +1,11 @@
 {
 	"name": "node-python",
 	"dockerComposeFile": "compose.yml",
-	// "containerEnv": {
-	// 	"DOCKER_USERNAME": "${localEnv:DOCKER_USERNAME}",
-	// 	"DOCKER_PASSWORD": "${localEnv:REGISTRY_TOKEN}"
-	// },
-  	// "initializeCommand": "echo ${REGISTRY_TOKEN} | docker login -u ${DOCKER_USERNAME} --password-stdin",
+	"containerEnv": {
+		"DOCKER_USERNAME": "${localEnv:DOCKER_USERNAME}",
+		"DOCKER_PASSWORD": "${localEnv:REGISTRY_TOKEN}"
+	},
+  	"initializeCommand": "echo ${REGISTRY_TOKEN} | docker login -u ${DOCKER_USERNAME} --password-stdin",
 
 	"service": "node-python-hdi",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
