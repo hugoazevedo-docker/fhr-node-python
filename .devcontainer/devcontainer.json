@@ -2,6 +2,14 @@
 	"name": "golang-hdi",
 
 	"dockerComposeFile": "compose.yml",
+
+	"containerEnv": {
+		"DOCKER_USERNAME": "${localEnv:DOCKER_USERNAME}",
+		"DOCKER_PASSWORD": "${localEnv:REGISTRY_TOKEN}"
+	},
+  	"initializeCommand": "echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USERNAME} --password-stdin",
+
+
 	"service": "golang-hdi",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"customizations": {
