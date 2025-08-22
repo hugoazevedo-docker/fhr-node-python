@@ -14,8 +14,7 @@
 			"extensions": [
 				"PKief.material-icon-theme",
 				"PKief.material-product-icons",
-				"anseki.vscode-color",
-				"golang.go"
+				"anseki.vscode-color"
 			]
 		}
 	},
