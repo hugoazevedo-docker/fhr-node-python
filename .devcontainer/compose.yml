@@ -1,6 +1,6 @@
 services:
 
-  node-python-hdi:
+  fhr-node-python-hdi:
     build:
       context: .
       dockerfile: Dockerfile
