@@ -33,26 +33,37 @@ EOF
 # ------------------------------------
 # Create new regular user `${USER_NAME}` and disable password and gecos for later
 # --gecos explained well here: https://askubuntu.com/a/1195288/635348
-RUN adduser --disabled-password --gecos '' ${USER_NAME}
+# Create vscode user
+#RUN adduser --disabled-password --gecos '' ${USER_NAME}
 
 #  Add new user `${USER_NAME}` to sudo group
-RUN adduser ${USER_NAME} sudo
+#RUN adduser ${USER_NAME} sudo
 
 # Ensure sudo group users are not asked for a password when using 
 # sudo command by ammending sudoers file
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+#RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Set the working directory
-WORKDIR /home/${USER_NAME}
+#WORKDIR /home/${USER_NAME}
 
 # Set the user as the owner of the working directory
-RUN chown -R ${USER_NAME}:${USER_NAME} /home/${USER_NAME}
+#RUN chown -R ${USER_NAME}:${USER_NAME} /home/${USER_NAME}
 
 # Switch to the regular user
-USER ${USER_NAME}
+#USER ${USER_NAME}
 
 # Avoid the message about sudo
-RUN touch ~/.sudo_as_admin_successful
+#RUN touch ~/.sudo_as_admin_successful
+
+RUN groupadd --gid 1001 vscode && \
+
+    useradd --uid 1001 --gid vscode --shell /bin/bash --create-home vscode && \
+
+    echo vscode ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/vscode && \
+
+    chmod 0440 /etc/sudoers.d/vscode
+
+USER vscode
 
 # ------------------------------------
 # Install OhMyBash
