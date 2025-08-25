@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM hugoazevedo560/node-python-codespaces:v1
+FROM hugoazevedo560/node-python-codespaces:v2
 
 LABEL maintainer="@hugoazevedo-docker"
 
