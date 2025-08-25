@@ -3,8 +3,6 @@ FROM hugoazevedo560/node-python-codespaces:v3
 
 LABEL maintainer="@hugoazevedo-docker"
 
-ARG USER_NAME=${USER_NAME}
-
 ARG DEBIAN_FRONTEND=noninteractive
 
 ENV LANG=en_US.UTF-8
@@ -15,6 +13,18 @@ ENV LC_CTYPE=en_US.UTF-8
 # ------------------------------------
 # Install Tools
 # ------------------------------------
+RUN <<EOF
+apt-get update 
+apt-get install -y curl wget git build-essential xz-utils software-properties-common sudo sshpass ca-certificates
+
+# Rebuild ldconfig cache for VS Code server compatibility
+ldconfig
+
+# Clean up
+apt-get clean autoclean
+apt-get autoremove --yes
+rm -rf /var/lib/{apt,dpkg,cache,log}/
+EOF
 
 # Rebuild ldconfig cache for VS Code server compatibility
 USER root
