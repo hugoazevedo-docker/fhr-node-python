@@ -6,9 +6,15 @@
 		"DOCKER_PASSWORD": "${localEnv:REGISTRY_TOKEN}"
 	},
   	"initializeCommand": "echo ${REGISTRY_TOKEN} | docker login -u ${DOCKER_USERNAME} --password-stdin",
-
 	"service": "fhr-node-python-hdi",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+      "installDockerBuildx": true,
+      "installDockerComposeSwitch": true,
+      "dockerDashComposeVersion": "v2.32.2"
+    	}
+	},
 	"customizations": {
 		"vscode": {
 			"extensions": [
