@@ -17,7 +17,9 @@ ENV LC_CTYPE=en_US.UTF-8
 # ------------------------------------
 
 # Rebuild ldconfig cache for VS Code server compatibility
-ldconfig
+USER root
+RUN ldconfig
+USER vscode
 
 # Clean up
 apt-get clean autoclean
